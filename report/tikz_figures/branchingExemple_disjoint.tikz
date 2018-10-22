@@ -1,0 +1,7 @@
+\branchingExampleMacro[
+  __A=vg,__B=v,__C=vb,__D=vp,__E=vr,__F=v,
+  __ab=eg,__ba=er,%
+  __ad=eg, __da=ep,%
+  __be=eg, __eb=er,%
+  __dfr=ep, __dfl=eg,%
+  __bc=eg, __ca=eb, __cd=eb, __ef=er]

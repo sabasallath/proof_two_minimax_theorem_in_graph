@@ -1,0 +1,97 @@
+%*************************************************************
+% TIKZ
+%*************************************************************
+\newcommand*\insertTikzFigure[4]{
+\begin{figure}[H]
+\begin{center}
+\scalebox{#1}{
+\input{tikz_figures/#2.tikz}
+}
+\caption{#3}
+\label{#4}
+\end{center}
+\end{figure}}
+
+%*************************************************************
+% GRAPH BRANCHING EXEMPLE
+%*************************************************************
+% MACRO
+\makeatletter
+\newcommand{\defkey}[1]{%
+\define@key{myargs}{__#1}{%
+    \expandafter\gdef\csname KVMacroKey#1\endcsname{##1}%
+  }
+}
+\defkey{A}
+\defkey{B}
+\defkey{C}
+\defkey{D}
+\defkey{E}
+\defkey{F}
+\defkey{ab}
+\defkey{ba}
+\defkey{ad}
+\defkey{da}
+\defkey{bc}
+\defkey{ca}
+\defkey{cd}
+\defkey{be}
+\defkey{eb}
+\defkey{ef}
+\defkey{dfr}
+\defkey{dfl}
+\makeatother
+
+\newcommand{\branchingExampleMacro}[1][]{%
+\setkeys{myargs}{#1}%
+% COMMAND WITH MACRO
+\begin{tikzpicture}
+  \tikzstyle{v}=[circle,line width = 0.5pt,draw,minimum size=15pt,inner sep=0pt]
+  \tikzstyle{vv}=[circle,line width = 1.5pt,draw,minimum size=15pt,inner sep=0pt]
+  \tikzstyle{vg}=[circle,draw,minimum size=16pt,line width=\KVMacroKeyNodeLine pt, inner sep=0pt, draw=black!50!green, text=black, text opacity=1, fill=black!50!green, fill opacity=0.2]
+
+  \tikzstyle{vb}=[circle,line width = 1.5pt,draw,minimum size=15pt,inner sep=0pt,
+  draw=black!30!blue, text=black, text opacity=1]
+  \tikzstyle{vg}=[circle,line width = 1.5pt,draw,minimum size=15pt,inner sep=0pt,
+  draw=black!30!green, text=black, text opacity=1]
+  \tikzstyle{vr}=[circle,line width = 1.5pt,draw,minimum size=15pt,inner sep=0pt,
+  draw=black!30!red, text=black, text opacity=1]
+  \tikzstyle{vp}=[circle,line width = 1.5pt,draw,minimum size=15pt,inner sep=0pt,
+  draw=violet, text=black, text opacity=1]
+  %
+  \tikzstyle{e}=[->,>=stealth,line width=0.5pt,black]
+  \tikzstyle{ee}=[->,>=stealth,line width=1.5pt,black]
+  \tikzstyle{eb}=[->,>=stealth,line width=1.5pt,black!30!blue]
+  \tikzstyle{eg}=[->,>=stealth,line width=1.5pt,black!30!green]
+  \tikzstyle{er}=[->,>=stealth,line width=1.5pt,black!30!red]
+  \tikzstyle{ep}=[->,>=stealth,line width=1.5pt,violet]
+  %
+  \tikzstyle{ed}=[dashed,>=stealth,line width=0.25pt,black]
+
+  % NODES
+  \node[\KVMacroKeyA] (xa) at (3, 5) {$a$};
+  \node[\KVMacroKeyB] (xb) at (1, 3) {$b$};
+  \node[\KVMacroKeyC] (xc) at (3, 3) {$c$};
+  \node[\KVMacroKeyD] (xd) at (5, 3) {$d$};
+  \node[\KVMacroKeyE] (xe) at (2, 1) {$e$};
+  \node[\KVMacroKeyF] (xf) at (4, 1) {$f$};
+
+  % EDGES
+  \draw[\KVMacroKeyab] (xa) edge[bend right=20] (xb);
+  \draw[\KVMacroKeyba] (xb) edge[bend right=20] (xa);
+
+  \draw[\KVMacroKeyad] (xa) edge[bend right=20] (xd);
+  \draw[\KVMacroKeyda] (xd) edge[bend right=20] (xa);
+
+  \draw[\KVMacroKeybe] (xb) edge[bend right=20] (xe);
+  \draw[\KVMacroKeyeb] (xe) edge[bend right=20] (xb);
+
+  \draw[\KVMacroKeydfr] (xd) edge[bend right=20] (xf);
+  \draw[\KVMacroKeydfl] (xd) edge[bend left=20] (xf);
+
+  \draw[\KVMacroKeybc] (xb) -- (xc);
+  \draw[\KVMacroKeyca] (xc) -- (xa);
+  \draw[\KVMacroKeycd] (xc) -- (xd);
+  \draw[\KVMacroKeyef] (xe) -- (xf);
+\end{tikzpicture}
+}

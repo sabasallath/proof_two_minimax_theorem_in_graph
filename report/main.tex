@@ -1,0 +1,121 @@
+\documentclass{article}
+\usepackage{packages}
+\usepackage{commands}
+\graphicspath{{img/}}
+
+%*************************************************************
+\title{Explanation of "On Two Minimax Theorems in Graph"}
+\author{Daniel Blévin\\George ??????}
+\date\today
+
+%*************************************************************
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+%************************************************************* THEOREM
+\newtheorem{edmonds_theorem}{THEOREM}
+
+%************************************************************* 1
+\section{Definitions}
+
+\subsection{Edge-disjoint paths}
+Two paths are edge-disjoint if they do not have any internal edge in common.
+
+\subsection{Branching :}
+
+% todo : merge in one definition (later)
+
+\paragraph{Branching One}
+In a directed graph $D = (V, A)$ a branching is a set of arcs not containing 
+circuits s.t. each node of $D$ is entered at most by one arc in $A'$. 
+(So the arc in $A'$ make up a forest). % A or A' ???
+
+\paragraph{Branching Two} {
+A branching $B$ is an arc set in a digraph $D$ that is a forest such that every node of $D$ 
+is the head of at most one arc of $B$. 
+A branching that is a tree is called an arborescence.
+A branching that is a spanning tree of $D$ is called a spanning arborescence of $D$. 
+Clearly, in a spanning arborescence B of $D$ every node of $D$ is the head of one arc of $B$ 
+except for one node. 
+This node is called the root of $B$. 
+If $r$ is the root of arborescence $B$ we also say that $B$ is rooted at $r$ or $r-$rooted.
+}
+
+\paragraph{R-branching}
+For a subset $R \subset V$, an $r-$branching in $G$ is a spanning forest $B \subset G$ in 
+which all vertices of $V - R$ have outdegree precisely $1$.
+
+\paragraph{r-branching}
+When $R$ just consists of a single vertex $r$, we refer to $B$ as an $r-$branching.
+
+\subsection{k-connected}
+A graph $G$ (digraph $D$) is called $k-$connected ($k-$diconnected) if every pair
+s, t of nodes is connected by at least $k$ $[s, t]-$paths ($(s, t)-$dipaths) whose sets of
+internal nodes are mutually disjoint.
+
+\subsection{a-cut}
+A $a-$cut of $G$ determined by a set $S \subset V(G)$ is the set of
+edges going from $S$ to $V(G) - S$. 
+It will be denoted by $\Delta_G(S)$.
+We also set that $\delta_G(S) = |\Delta_G(S)|$.
+
+\subsection{r-Cuts and r-Arborescences}
+
+Consider a connected digraph $(N, A)$ with $r \in N$ and nonnegative
+integer arc lengths $l_a$ for $a \in A$. An $r-$arborescence is a minimal arc
+set that contains an $rv-$dipath for every $v \in N$. 
+It follows that an $r-$arborescence contains $|N| - 1$ arcs forming a spanning tree and each
+node of $N - {r}$ is entered by exactly one arc.
+The minimal transversals of the clutter of r-arborescences are called $r-$cuts.
+
+\subsection{A note on orientation}
+A rooted tree is a tree in which one vertex has been designated the root.
+The edges of a rooted tree can be assigned a natural orientation, either away from 
+or towards the root, in which case the structure becomes a directed rooted tree.
+When a directed rooted tree has an orientation away from the root,
+ it is called an arborescence, branching, or out-tree;
+ when it has an orientation towards the root, 
+ it is called an anti-arborescence or in-tree.
+
+%************************************************************* 2
+\section{Definitions examples}
+
+\subsection{Branchings examples}
+
+Taking the next figure as exemple :
+\insertTikzFigure{1}{branchingExemple_base}{A graph}{tikz:branchingExemple_base}
+
+
+\subsubsection{Simple branching}
+
+Not yet.
+
+
+\subsubsection{Edge disjoint branching}
+
+Decomposition of the exemple figure in 3 branching routed respectively at $a, c, d, e$.
+\insertTikzFigure{1}{branchingExemple_disjoint}{A graph}{tikz:branchingExemple_disjoint}
+
+\subsubsection{Edge disjoint $a-$routed branching}
+
+\insertTikzFigure{1}{branchingExemple_arouted}{A graph}{tikz:branchingExemple_arouted}
+
+
+\subsection{Cuts examples}
+
+\subsubsection{General cut}
+
+\subsubsection{$a-$cut}
+
+
+\section{Theorems}
+
+\begin{edmonds_theorem}[Edmonds]
+The maximum number of edge-disjoint branchings (rooted at $a$) 
+equals the minimum number of edges in $a-$cuts.
+\end{edmonds_theorem}
+
+\end{document}
+
