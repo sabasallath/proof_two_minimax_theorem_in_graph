@@ -1,0 +1,8 @@
+*\cutExampleMacro[
+  __A=vr,__B=vr,__C=vr,__D=vr,__E=v,__F=vr,
+  __ab=e,__ba=e,%
+  __ad=e, __da=e,%
+  __be=ee, __eb=e,%
+  __dfr=e, __dfl=e,%
+  __bc=e, __ca=e, __cd=e, __ef=e,
+  __CUTSELECTION=2]

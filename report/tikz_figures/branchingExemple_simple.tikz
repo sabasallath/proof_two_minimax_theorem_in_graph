@@ -1,0 +1,9 @@
+\branchingExampleMacro[
+  __A=vv,__B=v,__C=v,__D=v,__E=v,__F=v,
+  __ab=ee,
+  __ad=ed,
+  __be=ee, __eb=ed,
+  __df=ed,
+  __bc=ee, __ca=ed, __cd=ee,
+  __cf=ee, __fc=ed, __ec=ed,
+  __fe=ed]

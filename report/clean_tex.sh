@@ -10,3 +10,5 @@ rm *.fdb_latexmk
 rm *.log
 rm *.synctex.gz
 rm *.fls
+rm *.toc
+

@@ -29,17 +29,17 @@
 \defkey{E}
 \defkey{F}
 \defkey{ab}
-\defkey{ba}
 \defkey{ad}
-\defkey{da}
 \defkey{bc}
 \defkey{ca}
 \defkey{cd}
 \defkey{be}
 \defkey{eb}
-\defkey{ef}
-\defkey{dfr}
-\defkey{dfl}
+\defkey{ec}
+\defkey{fe}
+\defkey{df}
+\defkey{cf}
+\defkey{fc}
 \makeatother
 
 \newcommand{\branchingExampleMacro}[1][]{%
@@ -77,6 +77,96 @@
   \node[\KVMacroKeyF] (xf) at (4, 1) {$f$};
 
   % EDGES
+  \draw[\KVMacroKeyab] (xa) -- (xb);
+
+  \draw[\KVMacroKeyad] (xa) -- (xd);
+
+  \draw[\KVMacroKeybe] (xb) edge[bend right=20] (xe);
+  \draw[\KVMacroKeyeb] (xe) edge[bend right=20] (xb);
+  \draw[\KVMacroKeycf] (xc) edge[bend right=20] (xf);
+  \draw[\KVMacroKeyfc] (xf) edge[bend right=20] (xc);
+  \draw[\KVMacroKeyec] (xe) -- (xc);
+
+  \draw[\KVMacroKeyfe] (xf) -- (xe);
+
+  \draw[\KVMacroKeydf] (xd) -- (xf);
+  \draw[\KVMacroKeybc] (xb) -- (xc);
+  \draw[\KVMacroKeyca] (xc) -- (xa);
+  \draw[\KVMacroKeycd] (xc) -- (xd);
+\end{tikzpicture}
+}
+
+% ********************************************************************
+
+
+%*************************************************************
+% CUT BRANCHING EXEMPLE
+%*************************************************************
+% MACRO
+\makeatletter
+\newcommand{\defkeyB}[1]{%
+\define@key{myargs2}{__#1}{%
+    \expandafter\gdef\csname KVMacroKey#1\endcsname{##1}%
+  }
+}
+\defkeyB{A}
+\defkeyB{B}
+\defkeyB{C}
+\defkeyB{D}
+\defkeyB{E}
+\defkeyB{F}
+\defkeyB{ab}
+\defkeyB{ba}
+\defkeyB{ad}
+\defkeyB{da}
+\defkeyB{bc}
+\defkeyB{ca}
+\defkeyB{cd}
+\defkeyB{be}
+\defkeyB{eb}
+\defkeyB{ef}
+\defkeyB{dfr}
+\defkeyB{dfl}
+\defkeyB{CUTSELECTION}
+\makeatother
+
+\newcommand{\cutExampleMacro}[1][]{%
+\setkeys{myargs2}{#1}%
+% COMMAND WITH MACRO
+\begin{tikzpicture}
+  \tikzstyle{v}=[circle,line width = 0.5pt,draw,minimum size=15pt,inner sep=0pt]
+  \tikzstyle{vv}=[circle,line width = 1pt,draw,minimum size=15pt,inner sep=0pt]
+  \tikzstyle{vg}=[circle,draw,minimum size=16pt,line width=\KVMacroKeyNodeLine pt, inner sep=0pt, draw=black!50!green, text=black, text opacity=1, fill=black!50!green, fill opacity=0.2]
+  
+  \tikzstyle{vb}=[circle,line width = 1pt,draw,minimum size=15pt,inner sep=0pt,
+  draw=black!30!blue, text=black, text opacity=1]
+  \tikzstyle{vg}=[circle,line width = 1pt,draw,minimum size=15pt,inner sep=0pt,
+  draw=black!30!green, text=black, text opacity=1, fill=black!30!green, fill opacity=0.2]
+  \tikzstyle{vr}=[circle,line width = 1pt,draw,minimum size=15pt,inner sep=0pt,
+  draw=black!30!red, text=black, text opacity=1, fill=black!30!red, fill opacity=0.2]
+  \tikzstyle{vp}=[circle,line width = 1pt,draw,minimum size=15pt,inner sep=0pt,
+  draw=violet, text=black, text opacity=1, fill=black!30!violet, fill opacity=0.2]
+  %
+  \tikzstyle{e}=[->,>=stealth,line width=0.5pt,black]
+  \tikzstyle{ee}=[->,>=stealth,line width=1pt,black]
+  \tikzstyle{eb}=[->,>=stealth,line width=1pt,black!30!blue]
+  \tikzstyle{eg}=[->,>=stealth,line width=1pt,black!30!green]
+  \tikzstyle{er}=[->,>=stealth,line width=1pt,black!30!red]
+  \tikzstyle{ep}=[->,>=stealth,line width=1pt,violet]
+  %
+  \tikzstyle{ed}=[dashed,>=stealth,line width=0.25pt,black]
+  \tikzstyle{vdr}=[circle,line width = 0.5pt,draw,minimum size=0pt,inner sep=0pt]
+  \tikzstyle{edr}=[dashed,>=stealth,line width=2pt,black!30!red]
+  
+  % NODES
+  \node[\KVMacroKeyA] (xa) at (3, 5) {$a$};
+  \node[\KVMacroKeyB] (xb) at (1, 3) {$b$};
+  \node[\KVMacroKeyC] (xc) at (3, 3) {$c$};
+  \node[\KVMacroKeyD] (xd) at (5, 3) {$d$};
+  \node[\KVMacroKeyE] (xe) at (2, 1) {$e$};
+  \node[\KVMacroKeyF] (xf) at (4, 1) {$f$};
+
+  % EDGES
   \draw[\KVMacroKeyab] (xa) edge[bend right=20] (xb);
   \draw[\KVMacroKeyba] (xb) edge[bend right=20] (xa);
 
@@ -93,5 +183,24 @@
   \draw[\KVMacroKeyca] (xc) -- (xa);
   \draw[\KVMacroKeycd] (xc) -- (xd);
   \draw[\KVMacroKeyef] (xe) -- (xf);
+
+  % CUTS
+  \ifthenelse{\equal{\KVMacroKeyCUTSELECTION}{1}}{
+  \node[vdr, draw=none] (xcut1) at (1.5, 5) {};
+  \node[vdr, draw=none] (xcut2) at (4.5, 5) {};
+  \draw[edr] (xcut1) edge[bend right=60] (xcut2);
+  }{}
+
+  \ifthenelse{\equal{\KVMacroKeyCUTSELECTION}{2}}{
+  \node[vdr, draw=none] (xcut3) at (3, 0.5) {};
+  \node[vdr, draw=none] (xcut4) at (1, 1.5) {};
+  \draw[edr] (xcut3) edge[bend right=60] (xcut4);
+  }{}
+
+  \ifthenelse{\equal{\KVMacroKeyCUTSELECTION}{3}}{
+  \node[vdr, draw=none] (xcut5) at (3, 3) {};
+  \draw[edr] (xcut5) circle (0.75);
+  }{}
+
 \end{tikzpicture}
 }

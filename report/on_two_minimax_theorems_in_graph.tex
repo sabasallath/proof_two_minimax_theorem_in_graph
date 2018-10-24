@@ -28,19 +28,22 @@ equals the minimum number of edges in $a-$cuts.
 %************************************************************* 2
 \section{Definitions}
 
-\subsection*{Edge-disjoint branchings}
-Two branching are edge-disjoint if they do not have any internal edge in common.
+\subsection*{Branching and a-cut (from the paper)}
 
-\subsection*{Branching :}
-
-% todo : merge in one definition (later)
-
-\paragraph{Branching One}
+\paragraph{branching}
 In a directed graph $D = (V, A)$ a branching is a set of arcs not containing 
 circuits s.t. each node of $D$ is entered at most by one arc in $A'$. 
 (So the arc in $A'$ make up a forest). % A or A' ???
 
-\paragraph{Branching Two} {
+\paragraph{a-cut}
+A $a-$cut of $G$ determined by a set $S \subset V(G)$ is the set of
+edges going from $S$ to $V(G) - S$. 
+It will be denoted by $\Delta_G(S)$.
+We also set that $\delta_G(S) = |\Delta_G(S)|$.
+
+
+\subsection*{Branching and a-cut (from books)}
+\paragraph{branching}
 A branching $B$ is an arc set in a digraph $D$ that is a forest such that every node of $D$ 
 is the head of at most one arc of $B$. 
 A branching that is a tree is called an arborescence.
@@ -49,54 +52,21 @@ Clearly, in a spanning arborescence B of $D$ every node of $D$ is the head of on
 except for one node. 
 This node is called the root of $B$. 
 If $r$ is the root of arborescence $B$ we also say that $B$ is rooted at $r$ or $r-$rooted.
-}
 
-\paragraph{R-branching}
-For a subset $R \subset V$, an $R-$branching in $G$ is a spanning forest $B \subset G$ in 
-which all vertices of $V - R$ have outdegree precisely $1$.
-
-\paragraph{r-branching}
-When $R$ just consists of a single vertex $r$, we refer to $B$ as an $r-$branching.
-
-\subsection*{k-connected}
-A graph $G$ (digraph $D$) is called $k-$connected ($k-$diconnected) if every pair
-s, t of nodes is connected by at least $k$ $[s, t]-$paths ($(s, t)-$dipaths) whose sets of
-internal nodes are mutually disjoint.
-
-\subsection*{a-cut}
-A $a-$cut of $G$ determined by a set $S \subset V(G)$ is the set of
-edges going from $S$ to $V(G) - S$. 
-It will be denoted by $\Delta_G(S)$.
-We also set that $\delta_G(S) = |\Delta_G(S)|$.
-
-\subsection*{r-Cuts and r-Arborescences}
-
-Consider a connected digraph $(N, A)$ with $r \in N$ and nonnegative
-integer arc lengths $l_a$ for $a \in A$. An $r-$arborescence is a minimal arc
-set that contains an $rv-$dipath for every $v \in N$. 
-It follows that an $r-$arborescence contains $|N| - 1$ arcs forming a spanning tree and each
-node of $N - {r}$ is entered by exactly one arc.
-The minimal transversals of the clutter of r-arborescences are called $r-$cuts.
-
-~
-
-We define a clutter C to be a family $E(C)$ of subsets of a finite ground
-set $V(C)$ with the property that $S_1 \nsubseteq S_2$ for all distinct $S_1, S_2 \in E(C)$.
-$V(C)$ is called the set of vertices and $E(C)$ the set of edges of $C$.
-
-\subsection*{r-cut 2}
-
-An r-cut in a digraph is an edge set $\delta^+(X)$ for some $X \subset V(G)$ with $r \in X$.
-
-\subsection*{r-arborescence 2}
-
-an Arborescence in a digraph $D = (V, A)$ is a set $A'$ of arcs making up a spanning tree 
+\paragraph{r-arborescence}
+An arborescence in a digraph $D = (V, A)$ is a set $A'$ of arcs making up a spanning tree 
 such that each node of $D$ is entered by at most one arc in $A'$. 
 It follows that there is exactly one node r that is not
 entered by any arc of $A'$. This node is called the root of $A'$, and $A'$ is called
 rooted in $r$, or an $r-$arborescence.
 
-\subsection*{A note on orientation}
+\paragraph{r-cut}
+An r-cut in a digraph is an edge set $\delta^+(X)$ for some $X \subset V(G)$ with $r \in X$.
+
+\paragraph{edge-disjoint branchings}
+Two branching are edge-disjoint if they do not have any internal edge in common.
+
+\paragraph{A note on orientation}
 A rooted tree is a tree in which one vertex has been designated the root.
 The edges of a rooted tree can be assigned a natural orientation, either away from 
 or towards the root, in which case the structure becomes a directed rooted tree.
@@ -105,32 +75,69 @@ it is called an arborescence, branching, or out-tree;
 when it has an orientation towards the root, 
 it is called an anti-arborescence or in-tree.
 
+
+% \subsection*{Alternative definition (from book 2)}
+
+% Consider a connected digraph $(N, A)$ with $r \in N$ and non-negative
+% integer arc lengths $l_a$ for $a \in A$. 
+% An $r-$arborescence is a minimal arc set that contains an $rv-$dipath for every $v \in N$. 
+% It follows that an $r-$arborescence contains $|N| - 1$ arcs forming a spanning tree and each
+% node of $N - {r}$ is entered by exactly one arc.
+% The minimal transversals of the clutter of r-arborescences are called $r-$cuts.
+% \\\\
+% We define a clutter C to be a family $E(C)$ of subsets of a finite ground
+% set $V(C)$ with the property that $S_1 \nsubseteq S_2$ for all distinct $S_1, S_2 \in E(C)$.
+% $V(C)$ is called the set of vertices and $E(C)$ the set of edges of $C$.
+
 %************************************************************* 2
 \section{Examples}
 
-\subsubsection*{Simple branching}
+\subsection{Branching}
 
+\subsubsection{Simple branching}
+\begin{minipage}{.5\textwidth}
+\centering
 \insertTikzFigure{1}{branchingExemple_base}
-{A digraph $G=(A, V)$}
+{A digraph $D=(A, V)$}
 {tikz:branchingExemple_base}
-
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+\centering
 \insertTikzFigure{1}{branchingExemple_simple}
-{A branching of $G$ routed at $a$.}
+{A branching of $D$ routed at $a$.}
 {tikz:branchingExemple_simple}
+\end{minipage}
 
-\subsubsection*{Edge disjoint branching}
+
+\subsubsection{Edge disjoint branching}
 
 \insertTikzFigure{1}{branchingExemple_disjoint}
 {Two edge-disjoint branching routed respectively at $a$ and $d$.}
 {tikz:branchingExemple_disjoint}
 
-\subsubsection*{Edge disjoint a-routed branching}
+\subsubsection{Edge disjoint a-routed branching}
 
 \insertTikzFigure{1}{branchingExemple_arouted}
 {Two edge-disjoint $a$-routed branching.}
 {tikz:branchingExemple_arouted}
 
-\subsubsection*{a-cut}
+\subsection{a-cut exemples}
+
+\insertTikzFigure{1}{cutExemple_base}
+{A digraph $D=(A, V)$.}
+{tikz:cutExemple_base}
+
+\insertTikzFigure{1}{cutExemple_cut1}
+{An a-cut of $D$,\\ $S = \{a\}$,\\ $\Delta_D(S)=\{ab, ad\}$,\\ $\delta_D(S) = 2$.}
+{tikz:cutExemple_cut1}
+
+\insertTikzFigure{1}{cutExemple_cut2}
+{An minimal a-cut of $D$,\\ $S = \{a, b, c, d, f\}$,\\ $\Delta_D(S)=\{be\}$,\\ $\delta_D(S) = 1$.}
+{tikz:cutExemple_cut1}
+
+\insertTikzFigure{1}{cutExemple_cut3}
+{An minimal a-cut of $D$,\\ $S = \{a, b, d, e, f\}$,\\ $\Delta_D(S)=\{bc\}$,\\ $\delta_D(S) = 1$.}
+{tikz:cutExemple_cut1}
 
 \end{document}
     

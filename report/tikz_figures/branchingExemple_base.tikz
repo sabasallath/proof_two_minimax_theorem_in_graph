@@ -1,7 +1,9 @@
 \branchingExampleMacro[
   __A=v,__B=v,__C=v,__D=v,__E=v,__F=v,
-  __ab=e,__ba=e,%
-  __ad=e, __da=e,%
-  __be=e, __eb=e,%
-  __dfr=e, __dfl=e,%
-  __bc=e, __ca=e, __cd=e, __ef=e]
+  __ab=e,
+  __ad=e,
+  __be=e, __eb=e,
+  __df=e,
+  __bc=e, __ca=e, __cd=e,
+  __cf=e, __fc=e, __ec=e,
+  __fe=e]
