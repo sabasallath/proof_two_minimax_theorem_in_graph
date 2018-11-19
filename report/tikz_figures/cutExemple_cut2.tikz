@@ -1,4 +1,4 @@
-*\cutExampleMacro[
+\cutExampleMacro[
   __A=vr,__B=vr,__C=vr,__D=vr,__E=v,__F=vr,
   __ab=e,__ba=e,%
   __ad=e, __da=e,%

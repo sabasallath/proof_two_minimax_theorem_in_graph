@@ -1,0 +1,241 @@
+\documentclass[8pt]{beamer}
+\usepackage{packages}
+\usepackage{commands}
+\graphicspath{{img/}}
+% !TeX root = ./on_two_minimax_theorems_in_graph_presentation.tex
+% !TEX program = xelatex
+
+
+%*************************************************************
+% BEAMER THEME AND TWIX
+%*************************************************************
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\usetheme[progressbar=frametitle]{metropolis}
+\useoutertheme{metropolis}
+\useinnertheme{metropolis}
+
+\setbeamertemplate{mini frame}{}
+\setbeamertemplate{mini frame in current section}{}
+\setbeamertemplate{mini frame in current subsection}{}
+\setbeamercolor{section in head/foot}{fg=normal text.bg, bg=mDarkTeal}
+\setbeamercolor{subsection in head/foot}{fg=normal text.bg, bg=structure.fg}
+
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{frametitle}{bg=mDarkTeal}
+
+\makeatletter
+\setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+
+\setbeamertemplate{footline}{%
+    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}{section in head/foot}
+      \insertsubsectionnavigationhorizontal{\paperwidth}{}{\hskip0pt plus1filll}\vskip3pt%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+    \end{beamercolorbox}
+}
+\makeatother
+
+%\setbeamercolor{background canvas}{bg=white}
+%*************************************************************
+\title{On Two Minimax Theorems in Graph}
+\author{Daniel Blévin - George Apaaboah}
+\date\today
+
+%*************************************************************
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+%************************************************************* THEOREM
+\newtheorem{edmonds_theorem}{THEOREM}
+\newtheorem{Lucchesi_and_Younger}{THEOREM}
+
+%************************************************************* 2
+\section{First theorem}
+
+% \subsection*{Branching and a-cut (from books)}
+% \paragraph{branching}
+% A branching $B$ is an arc set in a digraph $D$ that is a forest such that every node of $D$ 
+% is the head of at most one arc of $B$. 
+% A branching that is a tree is called an arborescence.
+% A branching that is a spanning tree of $D$ is called a spanning arborescence of $D$. 
+% Clearly, in a spanning arborescence B of $D$ every node of $D$ is the head of one arc of $B$ 
+% except for one node. 
+% This node is called the root of $B$. 
+% If $r$ is the root of arborescence $B$ we also say that $B$ is rooted at $r$ or $r-$rooted.
+
+% \paragraph{r-arborescence}
+% An arborescence in a digraph $D = (V, A)$ is a set $A'$ of arcs making up a spanning tree 
+% such that each node of $D$ is entered by at most one arc in $A'$. 
+% It follows that there is exactly one node r that is not
+% entered by any arc of $A'$. This node is called the root of $A'$, and $A'$ is called
+% rooted in $r$, or an $r-$arborescence.
+
+% \paragraph{r-cut}
+% An r-cut in a digraph is an edge set $\delta^+(X)$ for some $X \subset V(G)$ with $r \in X$.
+
+% \paragraph{edge-disjoint branchings}
+% Two branching are edge-disjoint if they do not have any internal edge in common.
+
+% \paragraph{A note on orientation}
+% A rooted tree is a tree in which one vertex has been designated the root.
+% The edges of a rooted tree can be assigned a natural orientation, either away from 
+% or towards the root, in which case the structure becomes a directed rooted tree.
+% When a directed rooted tree has an orientation away from the root,
+% it is called an arborescence, branching, or out-tree;
+% when it has an orientation towards the root, 
+% it is called an anti-arborescence or in-tree.
+
+% %************************************************************* 2
+\subsection{Definitions}
+
+\begin{frame}
+\frametitle{Branching}
+
+\textbf{branching (r-arborescence) :}
+In a directed graph $D = (V, A)$ a branching is a set of arcs not containing 
+circuits s.t. each node of $D$ is entered at most by one arc in $A'$. 
+(So the arc in $A'$ make up a forest). % A or A' ???
+
+~
+
+\splitpage{
+\insertTikzFigure{1}{branchingExemple_base}
+{A digraph $D=(A, V)$}
+{tikz:branchingExemple_base}
+}{
+\insertTikzFigure{1}{branchingExemple_simple}
+{A branching of $D$ routed at $a$.}
+{tikz:branchingExemple_simple}
+}
+
+\end{frame}
+
+%*************************************************************
+\begin{frame}
+\frametitle{Edge disjooint branching}
+
+\splitpage{
+    \insertTikzFigure{1}{branchingExemple_disjoint}
+    {Two edge-disjoint branching routed respectively at $a$ and $d$.}
+    {tikz:branchingExemple_disjoint}
+}{
+    \insertTikzFigure{1}{branchingExemple_arouted}
+    {Two edge-disjoint $a$-routed branching.}
+    {tikz:branchingExemple_arouted}
+}
+
+\end{frame}
+
+%*************************************************************
+\begin{frame}
+\frametitle{a-cut}
+
+\textbf{a-cut :}
+A $a-$cut of $G$ determined by a set $S \subset V(G)$ is the set of
+edges going from $S$ to $V(G) - S$. 
+It will be denoted by $\Delta_G(S)$.
+We also set that $\delta_G(S) = |\Delta_G(S)|$.
+
+~
+
+\threesplitpage
+{
+    \insertTikzFigure{0.6}{cutExemple_cut1}
+    {A a-cut of $D$,\\ $S = \{a\}$,\\ $\Delta_D(S)=\{ab, ad\}$,\\ $\delta_D(S) = 2$.}
+    {tikz:cutExemple_cut1}
+}{
+    \insertTikzFigure{0.6}{cutExemple_cut2}
+    {A minimal a-cut of $D$,\\ $S = \{a, b, c, d, f\}$,\\ $\Delta_D(S)=\{be\}$,\\ $\delta_D(S) = 1$.}
+    {tikz:cutExemple_cut2}
+}{
+    \insertTikzFigure{0.6}{cutExemple_cut3}
+    {A minimal a-cut of $D$,\\ $S = \{a, b, d, e, f\}$,\\ $\Delta_D(S)=\{bc\}$,\\ $\delta_D(S) = 1$.}
+    {tikz:cutExemple_cut3}
+}
+
+\end{frame}
+
+%*************************************************************
+\subsection{Theorem}
+\begin{frame}
+\frametitle{Theorem}
+
+\begin{edmonds_theorem}[Edmonds]
+The maximum number of edge-disjoint branchings (rooted at $a$) 
+equals the minimum number of edges in $a-$cuts.
+\end{edmonds_theorem}
+
+\end{frame}
+
+%*************************************************************
+\subsection{Proof}
+\begin{frame}
+\frametitle{Proof}
+
+Let $k$ represent the number of edges. If $\Delta_G(S) \ge k$ $\forall$ $S\subset V(G), a\in S$ then there are $k$ edge-disjoint branchings. 
+
+Let $F$ be a set of edges such that $F$ is an arborescence rooted at $a$. Then we want to show that $\Delta_{G-F}(S) \ge k-1$ $\forall$ $S\subset V(G),$ $a\in S$.
+
+If $F=E(G)$ then it is a branching and we are done, else $G-F$ contains $k-1$ edge-disjoint branchings and $F$ is in the $kth$ edge-disjoint branching. Following from this, we can see that $F$ only covers a set of vertices $T \subset V(G)$. Therefore, there exist a vertex $v$ that is not connected to $F$ and we can add an edge $e\in \Delta_G(T)$. This will yield an arborescence $F+e$ such that $F$ covers all points of $G$, satisfying $\Delta_{G-F}(S) \ge k-1$ $\forall$ $S\subset V(G),$ $a\in S$.
+
+\end{frame}
+\begin{frame}
+\frametitle{Proof}
+
+If we have a maximal set $A\subset V(G)$ such that $A$ contains the root $a$, $A \cup T \ne V(G)$ and $\delta_{G-F}(S) = k-1$. If no such $A$ exist then we have set $A$ which is not maximal. Then we have $\delta_{G-F}(A\cup T) > \delta_{G-F}(A)$ that we can add a new edge $e=(x,y)$ which belongs to $\Delta_{G-F}(A\cup T) - \Delta_{G-F}(A)$ such that $x\in T-A$ and $y\in V(G) -T-A$.
+
+Now we want to show that that we can add $e$ to $F$ and $F+e$ will be an arborescence and satisfy $\Delta_{G-F}(S) \ge k-1$. For sure, we can see that $F$ is an arborescence. If $e\not\in \Delta_G(S)$ then $$\delta_{G-F-e}(S) = \delta_{G-F}(S) \ge k-1$$
+Now, if we have that $e\in \Delta_G(S)$ then $x\in S$ and $y\in V(G)-S$. That is, $x$ and $y$ are in different set of vertices of $G$. Next, we will use the inequality; 
+\begin{equation}\delta_{G-F}(S\cup A) + \delta_{G-F}(S\cap A) \le \delta_{G-F}(S) + \delta_{G-F}(A)\end{equation}
+We already know from the maximality of $A$ that $\delta_{G-F}(A)=k-1$, $\delta_{G-F}(S\cap A) \ge k-1$ and $\delta_{G-F}(S\cup A) \ge k$. Then from $(1)$ we have $\delta_{G-F}(S) \ge k$. Therefore $\delta_{G-F-e}(S) \ge k-1$. 
+
+\end{frame}
+
+
+\section{Second theorem}
+\subsection{Definitions}
+\subsection{Theroem}
+
+%*************************************************************
+\begin{frame}
+\frametitle{Directed cut}
+
+\textbf{directed cut (dicuts) :}
+A directed cut of a weakly connect graph $G$ is the set $D = \Delta_G(S),\ (S \subset V(G),\ S \neq \varnothing)$ provided $\Delta_G(S),\ (V(G) - S) = \varnothing$. 
+%It's a set of arcs of the form $(X, V - X)$, where $X$ is a non-empty proper subset of $V$ such that there are no arcs from $V - X$ to $X$.
+
+\end{frame}
+
+%*************************************************************
+\begin{frame}
+\frametitle{dijoin}
+    
+\textbf{dijoin :} A dijoin is a subset $A' \subset A$ which covers all dicuts.
+
+~
+
+Let $\Omega(D)$ denote the maximum number of arc-disjoint dicuts in $D$ 
+and let $\epsilon(D)$ be the minimum cardinality of a dijoin.
+
+\end{frame}
+
+%*************************************************************
+\begin{frame}
+\frametitle{Theorem}
+    
+\begin{Lucchesi_and_Younger}[Lucchesi and Younger]
+The maximum number of disjoint directed cuts equals the minimum number of edges which cover all directed cuts.
+\end{Lucchesi_and_Younger}
+
+\end{frame}
+
+
+\end{document}
+

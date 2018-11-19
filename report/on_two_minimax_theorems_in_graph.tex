@@ -4,7 +4,7 @@
 \graphicspath{{img/}}
 
 %*************************************************************
-\title{Explanation of "On Two Minimax Theorems in Graph"}
+\title{Explanation of paper: "On Two Minimax Theorems in Graph"}
 \author{Daniel Blévin\\George Apaaboah}
 \date\today
 
@@ -14,17 +14,9 @@
 %\newpage
 \tableofcontents
 %\newpage
+
 %************************************************************* THEOREM
 \newtheorem{edmonds_theorem}{THEOREM}
-
-%************************************************************* 1
-\section{Theorems}
-
-\begin{edmonds_theorem}[Edmonds]
-The maximum number of edge-disjoint branchings (rooted at $a$) 
-equals the minimum number of edges in $a-$cuts.
-\end{edmonds_theorem}
-
 %************************************************************* 2
 \section{Definitions}
 
@@ -133,12 +125,34 @@ it is called an anti-arborescence or in-tree.
 
 \insertTikzFigure{1}{cutExemple_cut2}
 {An minimal a-cut of $D$,\\ $S = \{a, b, c, d, f\}$,\\ $\Delta_D(S)=\{be\}$,\\ $\delta_D(S) = 1$.}
-{tikz:cutExemple_cut1}
+{tikz:cutExemple_cut2}
 
 \insertTikzFigure{1}{cutExemple_cut3}
 {An minimal a-cut of $D$,\\ $S = \{a, b, d, e, f\}$,\\ $\Delta_D(S)=\{bc\}$,\\ $\delta_D(S) = 1$.}
-{tikz:cutExemple_cut1}
+{tikz:cutExemple_cut3}
+
+\section{Theorems}
+
+\begin{edmonds_theorem}[Edmonds]
+The maximum number of edge-disjoint branchings (rooted at $a$) 
+equals the minimum number of edges in $a-$cuts.
+\end{edmonds_theorem}
+
+\begin{proof}
+Let $k$ represent the number of edges. If $\Delta_G(S) \ge k$ $\forall$ $S\subset V(G), a\in S$ then there are $k$ edge-disjoint branchings. 
+
+Let $F$ be a set of edges such that $F$ is an arborescence rooted at $a$. Then we want to show that $\Delta_{G-F}(S) \ge k-1$ $\forall$ $S\subset V(G),$ $a\in S$.
+
+If $F=E(G)$ then it is a branching and we are done, else $G-F$ contains $k-1$ edge-disjoint branchings and $F$ is in the $kth$ edge-disjoint branching. Following from this, we can see that $F$ only covers a set of vertices $T \subset V(G)$. Therefore, there exist a vertex $v$ that is not connected to $F$ and we can add an edge $e\in \Delta_G(T)$. This will yield an arborescence $F+e$ such that $F$ covers all points of $G$, satisfying $\Delta_{G-F}(S) \ge k-1$ $\forall$ $S\subset V(G),$ $a\in S$.
+
+If we have a maximal set $A\subset V(G)$ such that $A$ contains the root $a$, $A \cup T \ne V(G)$ and $\delta_{G-F}(S) = k-1$. If no such $A$ exist then we have set $A$ which is not maximal. Then we have $\delta_{G-F}(A\cup T) > \delta_{G-F}(A)$ that we can add a new edge $e=(x,y)$ which belongs to $\Delta_{G-F}(A\cup T) - \Delta_{G-F}(A)$ such that $x\in T-A$ and $y\in V(G) -T-A$.
+
+Now we want to show that that we can add $e$ to $F$ and $F+e$ will be an arborescence and satisfy $\Delta_{G-F}(S) \ge k-1$. For sure, we can see that $F$ is an arborescence. If $e\not\in \Delta_G(S)$ then $$\delta_{G-F-e}(S) = \delta_{G-F}(S) \ge k-1$$
+Now, if we have that $e\in \Delta_G(S)$ then $x\in S$ and $y\in V(G)-S$. That is, $x$ and $y$ are in different set of vertices of $G$. Next, we will use the inequality; 
+\begin{equation}\delta_{G-F}(S\cup A) + \delta_{G-F}(S\cap A) \le \delta_{G-F}(S) + \delta_{G-F}(A)\end{equation}
+We already know from the maximality of $A$ that $\delta_{G-F}(A)=k-1$, $\delta_{G-F}(S\cap A) \ge k-1$ and $\delta_{G-F}(S\cup A) \ge k$. Then from $(1)$ we have $\delta_{G-F}(S) \ge k$. Therefore $\delta_{G-F-e}(S) \ge k-1$. 
+
+\end{proof}
 
 \end{document}
-    
-    
+

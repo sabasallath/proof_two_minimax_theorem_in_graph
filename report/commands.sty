@@ -4,6 +4,7 @@
 \newcommand*\insertTikzFigure[4]{
 \begin{figure}[H]
 \begin{center}
+\captionsetup{justification=centering,margin=0.25cm}
 \scalebox{#1}{
 \input{tikz_figures/#2.tikz}
 }
@@ -11,6 +12,25 @@
 \label{#4}
 \end{center}
 \end{figure}}
+
+%*************************************************************
+% SPLIT FIGURES
+%*************************************************************
+\newcommand{\splitpage}[2]
+{
+\begin{minipage}[t]{0.48\linewidth}\centering#1\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\linewidth}\centering#2\end{minipage}
+}
+
+\newcommand{\threesplitpage}[3]
+{
+\begin{minipage}[t]{0.32\linewidth}\centering#1\end{minipage}
+\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering#2\end{minipage}
+\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering#3\end{minipage}
+}
 
 %*************************************************************
 % GRAPH BRANCHING EXEMPLE
