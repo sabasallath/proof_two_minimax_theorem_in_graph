@@ -1,7 +1,6 @@
 %*************************************************************
-% TIKZ
+% UTILS
 %*************************************************************
-
 \newcommand*\eofproof{\hfill\qedsymbol}
 
 %*************************************************************
@@ -22,6 +21,13 @@
 %*************************************************************
 % SPLIT FIGURES
 %*************************************************************
+\newcommand{\splittextfig}[2]
+{
+\begin{minipage}[t]{0.65\linewidth}#1\end{minipage}
+\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering#2\end{minipage}
+}
+
 \newcommand{\splitpage}[2]
 {
 \begin{minipage}[t]{0.48\linewidth}\centering#1\end{minipage}

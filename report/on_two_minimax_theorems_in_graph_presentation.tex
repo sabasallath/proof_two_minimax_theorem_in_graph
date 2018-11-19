@@ -112,25 +112,66 @@ equals the minimum number of edges in $a-$cuts.
 \begin{frame}
 \frametitle{Proof}
 
-Let $k$ represent the number of edges. If $\Delta_G(S) \ge k$ $\forall$ $S\subset V(G), a\in S$ then there are $k$ edge-disjoint branchings. 
+Let $k$ be the minimum cardinality of an $a$-cut.\\
+\textbf{We prove by induction on $k$.}
+The case $k = 0$ is trivial.\\~\\
 
-Let $F$ be a set of edges such that $F$ is an arborescence rooted at $a$. Then we want to show that $\Delta_{G-F}(S) \ge k-1$ $\forall$ $S\subset V(G),$ $a\in S$.
+% Maybe useless statement
+% If $\Delta_G(S) \ge k,\ \forall S \subset V(G),\ a\in S$ then there are $k$ edge-disjoint branchings. 
 
-If $F=E(G)$ then it is a branching and we are done, else $G-F$ contains $k-1$ edge-disjoint branchings and $F$ is in the $kth$ edge-disjoint branching. Following from this, we can see that $F$ only covers a set of vertices $T \subset V(G)$. Therefore, there exist a vertex $v$ that is not connected to $F$ and we can add an edge $e\in \Delta_G(T)$. This will yield an arborescence $F+e$ such that $F$ covers all points of $G$, satisfying $\Delta_{G-F}(S) \ge k-1$ $\forall$ $S\subset V(G),$ $a\in S$.
+% + arborescence
+Let $F$ be a set of edges such that $F$ is an arborescence rooted at $a$.
+\begin{equation}
+    \Delta_{G-F}(S) \ge k-1,\ \forall\ S \subset V(G),\ a\in S  \label{eq:hyp}
+\end{equation}
+
+If \eqref{eq:hyp}, we are done by induction.
+Suppose that \eqref{eq:hyp} holds.
+
+If $F = E(G)$ then it is a branching and we are done ($G-F$ contains $k-1$ edge-disjoint branchings and $F$ is in the $k^{th}$ edge-disjoint branching).
+
+If $F \neq E(G)$ and only cover a set $T \subset V(G)$ 
+we show we can add an edge $e \in \Delta_G(T)$ to $F$ so that $F + e$ still satisfies \eqref{eq:hyp}.
+
+% ~
+
+% Following from this, we can see that $F$ only covers a set of vertices $T \subset V(G)$. Therefore, there exist a vertex $v$ that is not connected to $F$ and we can add an edge $e\in \Delta_G(T)$. This will yield an arborescence $F+e$ such that $F$ covers all points of $G$, satisfying $\Delta_{G-F}(S) \ge k-1$ $\forall$ $S\subset V(G),$ $a\in S$.
 \end{frame}
 
 %*************************************************************
 \begin{frame}
 \frametitle{Proof}
-\insertTikzFigure{0.6}{p1edgeexist}
-{}
-{tikz:p1edgeexist}
+Consider a maximal set $A\subset V(G)$ s.t :
+\begin{subequations}
+\begin{align}
+    & a \in A \\ 
+    & A \cup T \ne V(G) \\ 
+    & \delta_{G-F}(S) = k - 1 
+\end{align}
+\end{subequations}
 
-If we have a maximal set $A\subset V(G)$ such that $A$ contains the root $a$, $A \cup T \ne V(G)$ and $\delta_{G-F}(S) = k-1$. If no such $A$ exist then we have set $A$ which is not maximal. Then we have $\delta_{G-F}(A\cup T) > \delta_{G-F}(A)$ that we can add a new edge $e=(x,y)$ which belongs to $\Delta_{G-F}(A\cup T) - \Delta_{G-F}(A)$ such that $x\in T-A$ and $y\in V(G) -T-A$.
+If no such $A$ exists, any edge of $\Delta_G(T)$ can be added to $F$.
+
+\splittextfig{
+    \vskip 1cm
+    Otherwise let $e = (x, y) \in \Delta_{G-F}(A\cup T) - \Delta_{G-F}(A)$
+    Such an edge must exist because
+    \begin{equation*}
+    \delta_{G-F}(A \cup T) = \delta_G(A \cup T) \geq k > k - 1 = \delta_{G-F}(A)
+    \end{equation*}
+}{
+    \insertTikzFigure{0.9}{p1edgeexist}
+    {}
+    {tikz:p1edgeexist}
+}
 \end{frame}
 
 %*************************************************************
 \begin{frame}
+
+% from above frame
+%which belongs to $\Delta_{G-F}(A\cup T) - \Delta_{G-F}(A)$ such that $x\in T-A$ and $y\in V(G) -T-A$.
+
 Now we want to show that that we can add $e$ to $F$ and $F+e$ will be an arborescence and satisfy $\Delta_{G-F}(S) \ge k-1$. For sure, we can see that $F$ is an arborescence. If $e\not\in \Delta_G(S)$ then $$\delta_{G-F-e}(S) = \delta_{G-F}(S) \ge k-1$$
 Now, if we have that $e\in \Delta_G(S)$ then $x\in S$ and $y\in V(G)-S$. That is, $x$ and $y$ are in different set of vertices of $G$. Next, we will use the inequality; 
 \begin{equation}\delta_{G-F}(S\cup A) + \delta_{G-F}(S\cap A) \le \delta_{G-F}(S) + \delta_{G-F}(A)\end{equation}
@@ -187,7 +228,9 @@ The maximum number of disjoint directed cuts equals the minimum number of edges 
 \begin{frame}
 We will use induction on the number of edges. \\
 \textbf{Case 1:} If there are no edges, then the theorem is proved. \\
-\textbf{Case 2:} Let $k$ be the maximum directed cuts in $G$, $G_e"$ a digraph resulting from contraction of $e$. If $G_e"$ contains at most $k-1$ edge-disjoint directed cuts then, by the induction hypothesis, $\exists$ $k-1$ edges $e_1,\dots,e_{k-1}$ covering all directed cuts of $G_e"$. \\
+\textbf{Case 2:} Let $k$ be the maximum directed cuts in $G$, $G_e"$ a digraph 
+resulting from contraction of $e$. 
+If $G_e"$ contains at most $k-1$ edge-disjoint directed cuts then, by the induction hypothesis, $\exists$ $k-1$ edges $e_1,\dots,e_{k-1}$ covering all directed cuts of $G_e"$. \\
 From above, we observe that adding $e$ yields $e, e_1,\dots,e_{k-1}$ which is $k$ edges and cover all directed cuts of $G$. Since we need at least $k$ edges, the assertion is proved and we may assume that $G_e"$ contains $k$ disjoint directed cuts for each edge $e$.\\
 
 If we subdivide all the edges of $G$ by a point, then the graph that we will obtain contains $k+1$ disjoint directed cuts. Hence we can find a subdivision $H$ of $G$ that contains $k$ at most $k$ disjoint directed cuts. If we again subdivide an edge $f$ of $H$ by a point, then it will contain $k+1$ disjoint directed cuts. Hence $H$ contains $k+1$ directed cuts $D_1,\dots,D_{k+1}$ such that only two of them have $f$ as a common edge. 
@@ -226,13 +269,15 @@ $$\underset{D\in F}{\sum}|S_D|^2 < \underset{D\in F'}{\sum}|S_D|^2$$
 since 
 $$|S_{D_1}\cup S_{D_2}|^2 + |S_{D_1}\cap S_{D_2}|>|S_{D_1}|^2+|S_{D_2}|^2$$
 
-Hence, we cannot repeat the same process of $F$ for $F'$ and achieve a cycle. We get a collection $F_0$ of directed cuts such that any two are a laminar and $|F_0| = |F|$. 
+Hence, we cannot repeat the same process of $F$ for $F'$ and achieve a cycle.
+We get a collection $F_0$ of directed cuts such that any two are a laminar and $|F_0| = |F|$. 
 
 Next, we prove the \textit{Lemma} for the case when $F$ consist of pairwise laminar cuts. 
 
 Let $F=\{D_1,\dots,D_N\}$, then we construct a graph $G'$ as follows:
 
-$V(G')=\{v_1,\dots,v_N\}$ and join $v_i$ to $v_j$ \textit{iff} $D_i \cap D_j \ne \emptyset$. Then $G'$ contains at most $k$ independent points. 
+$V(G')=\{v_1,\dots,v_N\}$ and join $v_i$ to $v_j$ \textit{iff} $D_i \cap D_j \ne \emptyset$.
+Then $G'$ contains at most $k$ independent points. 
 
 \end{frame}
 
@@ -240,7 +285,8 @@ $V(G')=\{v_1,\dots,v_N\}$ and join $v_i$ to $v_j$ \textit{iff} $D_i \cap D_j \ne
 \begin{frame}
 
 Now we will show that $G'$ is bipartite. \\
-Consider a circuit $(v_1,\dots,v_m)$ in $G'$ and the corresponding sets $S_{D_1},\dots,S_{D_m}$. Then $D_1,\dots,D_m$ must be different. If $D_v = D_\mu$ then each edge of $D_v$ also belongs to $D_\mu$ and no other member of $F$. Hence $v$ has degree 1 and cannot occur in any circuit of $G'$.
+Consider a circuit $(v_1,\dots,v_m)$ in $G'$ and the corresponding sets $S_{D_1},\dots,S_{D_m}$.
+Then $D_1,\dots,D_m$ must be different. If $D_v = D_\mu$ then each edge of $D_v$ also belongs to $D_\mu$ and no other member of $F$. Hence $v$ has degree 1 and cannot occur in any circuit of $G'$.
 
 Since $D_i \cap D_{i+1} \ne \emptyset$, we have either $S_{D_i}\subset S_{D_{i+1}}$ or $S_{D_{i+1}}\subset S_{D_i}$
 
