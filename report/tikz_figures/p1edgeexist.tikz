@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+\tikzstyle{v}=[circle,line width = 0.5pt,draw,minimum size=15pt,inner sep=0pt]
+\tikzstyle{vv}=[circle,line width = 1pt,draw,minimum size=15pt,inner sep=0pt]
+\tikzstyle{e}=[->,>=stealth,line width=0.5pt,black]
+\tikzstyle{ee}=[->,>=stealth,line width=1pt,black]
+
+% NODES
+\node[v] (xr) at (0, 0) {$r$};
+\node[v] (xx) at (2, 0) {$x$};
+\node[v] (xy) at (2,-2) {$y$};
+
+% EDGES
+\draw[e] (xx) -- node[right] {$e$} (xy);
+
+\draw (1,0) ellipse (1.5cm and 0.8cm);
+\draw (0,-1) ellipse (0.8cm and 1.5cm);
+\end{tikzpicture}

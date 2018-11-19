@@ -186,11 +186,19 @@ Let $F$ be a set of edges such that $F$ is an arborescence rooted at $a$. Then w
 If $F=E(G)$ then it is a branching and we are done, else $G-F$ contains $k-1$ edge-disjoint branchings and $F$ is in the $kth$ edge-disjoint branching. Following from this, we can see that $F$ only covers a set of vertices $T \subset V(G)$. Therefore, there exist a vertex $v$ that is not connected to $F$ and we can add an edge $e\in \Delta_G(T)$. This will yield an arborescence $F+e$ such that $F$ covers all points of $G$, satisfying $\Delta_{G-F}(S) \ge k-1$ $\forall$ $S\subset V(G),$ $a\in S$.
 
 \end{frame}
+
+%*************************************************************
 \begin{frame}
 \frametitle{Proof}
+\insertTikzFigure{0.6}{p1edgeexist}
+{}
+{tikz:p1edgeexist}
 
 If we have a maximal set $A\subset V(G)$ such that $A$ contains the root $a$, $A \cup T \ne V(G)$ and $\delta_{G-F}(S) = k-1$. If no such $A$ exist then we have set $A$ which is not maximal. Then we have $\delta_{G-F}(A\cup T) > \delta_{G-F}(A)$ that we can add a new edge $e=(x,y)$ which belongs to $\Delta_{G-F}(A\cup T) - \Delta_{G-F}(A)$ such that $x\in T-A$ and $y\in V(G) -T-A$.
+\end{frame}
 
+%*************************************************************
+\begin{frame}
 Now we want to show that that we can add $e$ to $F$ and $F+e$ will be an arborescence and satisfy $\Delta_{G-F}(S) \ge k-1$. For sure, we can see that $F$ is an arborescence. If $e\not\in \Delta_G(S)$ then $$\delta_{G-F-e}(S) = \delta_{G-F}(S) \ge k-1$$
 Now, if we have that $e\in \Delta_G(S)$ then $x\in S$ and $y\in V(G)-S$. That is, $x$ and $y$ are in different set of vertices of $G$. Next, we will use the inequality; 
 \begin{equation}\delta_{G-F}(S\cup A) + \delta_{G-F}(S\cap A) \le \delta_{G-F}(S) + \delta_{G-F}(A)\end{equation}
