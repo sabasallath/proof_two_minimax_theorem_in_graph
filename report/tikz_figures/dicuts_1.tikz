@@ -1,0 +1,35 @@
+\begin{tikzpicture}
+\tikzstyle{v}=[circle,line width = 0.5pt,draw,minimum size=15pt,inner sep=0pt]
+\tikzstyle{vv}=[circle,line width = 1pt,draw,minimum size=15pt,inner sep=0pt]
+\tikzstyle{e}=[->,>=stealth,line width=0.5pt,black]
+\tikzstyle{ee}=[->,>=stealth,line width=1pt,black]
+\tikzstyle{edr}=[dashed,>=stealth,line width=1pt,black!30!red]
+
+% NODES
+\node[v] (xa) at (0, 0) {$a$};
+\node[v] (xb) at (-1, -2) {$b$};
+\node[v] (xc) at (0, -2) {$c$};
+\node[v] (xd) at (1, -2) {$d$};
+\node[v] (xe) at (0, -4) {$e$};
+
+% EDGES
+\draw[e] (xa) -- (xb);
+\draw[e] (xa) -- (xc);
+\draw[e] (xa) -- (xd);
+\draw[e] (xb) -- (xc);
+\draw[e] (xb) -- (xe);
+\draw[e] (xc) -- (xd);
+\draw[e] (xc) -- (xe);
+\draw[e] (xd) -- (xe);
+
+\begin{scope}
+    \clip (-1.5,-4) rectangle (1.5,-2.5);
+    \draw[edr] (xe) circle (0.75);
+\end{scope}
+
+\begin{scope}
+    \clip (1.5,0) rectangle (-1.5,-1.5);
+    \draw[edr] (xa) circle (0.75);
+\end{scope}
+
+\end{tikzpicture}

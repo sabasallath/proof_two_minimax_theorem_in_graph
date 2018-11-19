@@ -1,43 +1,12 @@
 \documentclass[8pt]{beamer}
 \usepackage{packages}
 \usepackage{commands}
+\usepackage{beamer_options}
 \graphicspath{{img/}}
+% Magic comment for latex studio
 % !TeX root = ./on_two_minimax_theorems_in_graph_presentation.tex
 % !TEX program = xelatex
 
-
-%*************************************************************
-% BEAMER THEME AND TWIX
-%*************************************************************
-\setbeamertemplate{bibliography item}{\insertbiblabel}
-\usetheme[progressbar=frametitle]{metropolis}
-\useoutertheme{metropolis}
-\useinnertheme{metropolis}
-
-\setbeamertemplate{mini frame}{}
-\setbeamertemplate{mini frame in current section}{}
-\setbeamertemplate{mini frame in current subsection}{}
-\setbeamercolor{section in head/foot}{fg=normal text.bg, bg=mDarkTeal}
-\setbeamercolor{subsection in head/foot}{fg=normal text.bg, bg=structure.fg}
-
-\setbeamercolor{normal text}{fg=black}
-\setbeamercolor{frametitle}{bg=mDarkTeal}
-
-\makeatletter
-\setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
-
-\setbeamertemplate{footline}{%
-    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
-    \end{beamercolorbox}
-    \begin{beamercolorbox}{section in head/foot}
-      \insertsubsectionnavigationhorizontal{\paperwidth}{}{\hskip0pt plus1filll}\vskip3pt%
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
-    \end{beamercolorbox}
-}
-\makeatother
-
-%\setbeamercolor{background canvas}{bg=white}
 %*************************************************************
 \title{On Two Minimax Theorems in Graph}
 \author{Daniel Blévin - George Apaaboah}
@@ -45,9 +14,7 @@
 
 %*************************************************************
 \begin{document}
-
 \maketitle
-
 \begin{frame}
 \tableofcontents
 \end{frame}
@@ -55,46 +22,14 @@
 %************************************************************* THEOREM
 \newtheorem{edmonds_theorem}{THEOREM}
 \newtheorem{Lucchesi_and_Younger}{THEOREM}
+\newtheorem{ly_lemma}{LEMMA}
+\newtheorem{hypergraph}{Theorem}
 
-%************************************************************* 2
+%=============================================================
 \section{First theorem}
-
-% \subsection*{Branching and a-cut (from books)}
-% \paragraph{branching}
-% A branching $B$ is an arc set in a digraph $D$ that is a forest such that every node of $D$ 
-% is the head of at most one arc of $B$. 
-% A branching that is a tree is called an arborescence.
-% A branching that is a spanning tree of $D$ is called a spanning arborescence of $D$. 
-% Clearly, in a spanning arborescence B of $D$ every node of $D$ is the head of one arc of $B$ 
-% except for one node. 
-% This node is called the root of $B$. 
-% If $r$ is the root of arborescence $B$ we also say that $B$ is rooted at $r$ or $r-$rooted.
-
-% \paragraph{r-arborescence}
-% An arborescence in a digraph $D = (V, A)$ is a set $A'$ of arcs making up a spanning tree 
-% such that each node of $D$ is entered by at most one arc in $A'$. 
-% It follows that there is exactly one node r that is not
-% entered by any arc of $A'$. This node is called the root of $A'$, and $A'$ is called
-% rooted in $r$, or an $r-$arborescence.
-
-% \paragraph{r-cut}
-% An r-cut in a digraph is an edge set $\delta^+(X)$ for some $X \subset V(G)$ with $r \in X$.
-
-% \paragraph{edge-disjoint branchings}
-% Two branching are edge-disjoint if they do not have any internal edge in common.
-
-% \paragraph{A note on orientation}
-% A rooted tree is a tree in which one vertex has been designated the root.
-% The edges of a rooted tree can be assigned a natural orientation, either away from 
-% or towards the root, in which case the structure becomes a directed rooted tree.
-% When a directed rooted tree has an orientation away from the root,
-% it is called an arborescence, branching, or out-tree;
-% when it has an orientation towards the root, 
-% it is called an anti-arborescence or in-tree.
-
-% %************************************************************* 2
+%-------------------------------------------------------------
 \subsection{Definitions}
-
+%*************************************************************
 \begin{frame}
 \frametitle{Branching}
 
@@ -114,7 +49,6 @@ circuits s.t. each node of $D$ is entered at most by one arc in $A'$.
 {A branching of $D$ routed at $a$.}
 {tikz:branchingExemple_simple}
 }
-
 \end{frame}
 
 %*************************************************************
@@ -130,7 +64,6 @@ circuits s.t. each node of $D$ is entered at most by one arc in $A'$.
     {Two edge-disjoint $a$-routed branching.}
     {tikz:branchingExemple_arouted}
 }
-
 \end{frame}
 
 %*************************************************************
@@ -159,11 +92,11 @@ We also set that $\delta_G(S) = |\Delta_G(S)|$.
     {A minimal a-cut of $D$,\\ $S = \{a, b, d, e, f\}$,\\ $\Delta_D(S)=\{bc\}$,\\ $\delta_D(S) = 1$.}
     {tikz:cutExemple_cut3}
 }
-
 \end{frame}
 
-%*************************************************************
+%-------------------------------------------------------------
 \subsection{Theorem}
+%*************************************************************
 \begin{frame}
 \frametitle{Theorem}
 
@@ -171,11 +104,11 @@ We also set that $\delta_G(S) = |\Delta_G(S)|$.
 The maximum number of edge-disjoint branchings (rooted at $a$) 
 equals the minimum number of edges in $a-$cuts.
 \end{edmonds_theorem}
-
 \end{frame}
 
-%*************************************************************
+%-------------------------------------------------------------
 \subsection{Proof}
+%*************************************************************
 \begin{frame}
 \frametitle{Proof}
 
@@ -184,7 +117,6 @@ Let $k$ represent the number of edges. If $\Delta_G(S) \ge k$ $\forall$ $S\subse
 Let $F$ be a set of edges such that $F$ is an arborescence rooted at $a$. Then we want to show that $\Delta_{G-F}(S) \ge k-1$ $\forall$ $S\subset V(G),$ $a\in S$.
 
 If $F=E(G)$ then it is a branching and we are done, else $G-F$ contains $k-1$ edge-disjoint branchings and $F$ is in the $kth$ edge-disjoint branching. Following from this, we can see that $F$ only covers a set of vertices $T \subset V(G)$. Therefore, there exist a vertex $v$ that is not connected to $F$ and we can add an edge $e\in \Delta_G(T)$. This will yield an arborescence $F+e$ such that $F$ covers all points of $G$, satisfying $\Delta_{G-F}(S) \ge k-1$ $\forall$ $S\subset V(G),$ $a\in S$.
-
 \end{frame}
 
 %*************************************************************
@@ -203,45 +135,152 @@ Now we want to show that that we can add $e$ to $F$ and $F+e$ will be an arbores
 Now, if we have that $e\in \Delta_G(S)$ then $x\in S$ and $y\in V(G)-S$. That is, $x$ and $y$ are in different set of vertices of $G$. Next, we will use the inequality; 
 \begin{equation}\delta_{G-F}(S\cup A) + \delta_{G-F}(S\cap A) \le \delta_{G-F}(S) + \delta_{G-F}(A)\end{equation}
 We already know from the maximality of $A$ that $\delta_{G-F}(A)=k-1$, $\delta_{G-F}(S\cap A) \ge k-1$ and $\delta_{G-F}(S\cup A) \ge k$. Then from $(1)$ we have $\delta_{G-F}(S) \ge k$. Therefore $\delta_{G-F-e}(S) \ge k-1$. 
-
+\eofproof
 \end{frame}
 
-
+%=============================================================
 \section{Second theorem}
+%-------------------------------------------------------------
 \subsection{Definitions}
-\subsection{Theroem}
-
 %*************************************************************
 \begin{frame}
-\frametitle{Directed cut}
+\frametitle{Definitions}
 
 \textbf{directed cut (dicuts) :}
-A directed cut of a weakly connect graph $G$ is the set $D = \Delta_G(S),\ (S \subset V(G),\ S \neq \varnothing)$ provided $\Delta_G(S),\ (V(G) - S) = \varnothing$. 
-%It's a set of arcs of the form $(X, V - X)$, where $X$ is a non-empty proper subset of $V$ such that there are no arcs from $V - X$ to $X$.
-
-\end{frame}
-
-%*************************************************************
-\begin{frame}
-\frametitle{dijoin}
-    
-\textbf{dijoin :} A dijoin is a subset $A' \subset A$ which covers all dicuts.
+A directed cut of a weakly connect graph $G$ is the set $D = \Delta_G(S),\ (S \subset V(G),\ S \neq \varnothing)$ provided $\Delta_G(S),\ (V(G) - S) = \varnothing$.
 
 ~
-
-Let $\Omega(D)$ denote the maximum number of arc-disjoint dicuts in $D$ 
+    
+\textbf{dijoin :} A dijoin is a subset $A' \subset A$ which covers all dicuts. Let $\Omega(D)$ denote the maximum number of arc-disjoint dicuts in $D$ 
 and let $\epsilon(D)$ be the minimum cardinality of a dijoin.
+
+\threesplitpage
+{
+    \insertTikzFigure{0.8}{dicuts_0}
+    {A weakly connected digraph containing 3 dicuts}
+    {tikz:dicuts_0}
+}{
+    \insertTikzFigure{0.8}{dicuts_1}
+    {Arc-disjoint dicuts\\$\Omega(G) = 2$}
+    {tikz:dicuts_1}
+}{
+    \insertTikzFigure{0.8}{dicuts_2}
+    {Dijoin of minimal cardinality\\$\epsilon(G) = 2$}
+    {tikz:dicuts_2}
+}
 
 \end{frame}
 
+%-------------------------------------------------------------
+\subsection{Theroem}
 %*************************************************************
 \begin{frame}
 \frametitle{Theorem}
     
 \begin{Lucchesi_and_Younger}[Lucchesi and Younger]
-The maximum number of disjoint directed cuts equals the minimum number of edges which cover all directed cuts.
+The maximum number of disjoint directed cuts equals the minimum number of edges which cover all directed cuts ($\Omega(G) = \epsilon(G)$).
 \end{Lucchesi_and_Younger}
 
+\end{frame}
+
+%*************************************************************
+\begin{frame}
+We will use induction on the number of edges. \\
+\textbf{Case 1:} If there are no edges, then the theorem is proved. \\
+\textbf{Case 2:} Let $k$ be the maximum directed cuts in $G$, $G_e"$ a digraph resulting from contraction of $e$. If $G_e"$ contains at most $k-1$ edge-disjoint directed cuts then, by the induction hypothesis, $\exists$ $k-1$ edges $e_1,\dots,e_{k-1}$ covering all directed cuts of $G_e"$. \\
+From above, we observe that adding $e$ yields $e, e_1,\dots,e_{k-1}$ which is $k$ edges and cover all directed cuts of $G$. Since we need at least $k$ edges, the assertion is proved and we may assume that $G_e"$ contains $k$ disjoint directed cuts for each edge $e$.\\
+
+If we subdivide all the edges of $G$ by a point, then the graph that we will obtain contains $k+1$ disjoint directed cuts. Hence we can find a subdivision $H$ of $G$ that contains $k$ at most $k$ disjoint directed cuts. If we again subdivide an edge $f$ of $H$ by a point, then it will contain $k+1$ disjoint directed cuts. Hence $H$ contains $k+1$ directed cuts $D_1,\dots,D_{k+1}$ such that only two of them have $f$ as a common edge. 
+
+From above, $H_"f$ arises from either $G$ or $G_f"$ by subdivision. Hence from the assumption made above, $H$ contains $k$ disjoint directed cuts $c_1,\dots,c_k$ and $f$ not in $c_i$. Thus $D_1,\dots,D_{k+1},c_1,\dots,c_k$ is a collection of directed cuts of $G_0$ and any edge belongs to at most two of them. 
+
+\end{frame}
+
+%*************************************************************
+\begin{frame}
+
+Next, we have the lemma:\\
+\begin{ly_lemma}[]
+If a digraph $G$ contains at most $k$ disjoint directed cuts, and $F$ is any collection of directed cuts in $G$ such that any edge belongs to at most two of them, then $|F| \le 2k$. 
+\end{ly_lemma}
+
+% \begin{proof}[Proof]
+Let $D=\Delta_G(S)$, $(S\subset V(G), S\ne \emptyset$) provided $\Delta_G(V(G)-S)=\emptyset$. Let $S_D$ be a set uniquely determined by by a directed cut $D$\\
+
+First we replace $F$ by a collection of a simple structure. Let $D_1, D_2 \in F$ be called a laminar if $S_{D_1}\cap S_{D_2}=\emptyset \text{ or } S_{D_1}\subset S_{D_2}, \text{ or } S_{D_2}\subset S_{D_1} \text{ or } S_{D_1}\cup S_{D_2} = V(G)$. Else $D_1, D_2$ is a crossing\\
+
+Let $D_1, D_2$ be a crossing pair and set the following:
+$$D_1'=\Delta_G(S_{D_1} \cup S_{D_2})$$
+$$D_2'=\Delta_G(S_{D_1} \cap S_{D_2})$$
+$$F'=F\cup \{D_1',D_2' \}-\{D_1,D_2 \}$$
+
+From these, we can see that $D_1', D_2'$ are directed cuts and cover any edge the same number of times as $D_1, D_2$. Hence $|F'| = |F|$. 
+
+\end{frame}
+
+%*************************************************************
+\begin{frame}
+
+Also,
+$$\underset{D\in F}{\sum}|S_D|^2 < \underset{D\in F'}{\sum}|S_D|^2$$
+since 
+$$|S_{D_1}\cup S_{D_2}|^2 + |S_{D_1}\cap S_{D_2}|>|S_{D_1}|^2+|S_{D_2}|^2$$
+
+Hence, we cannot repeat the same process of $F$ for $F'$ and achieve a cycle. We get a collection $F_0$ of directed cuts such that any two are a laminar and $|F_0| = |F|$. 
+
+Next, we prove the \textit{Lemma} for the case when $F$ consist of pairwise laminar cuts. 
+
+Let $F=\{D_1,\dots,D_N\}$, then we construct a graph $G'$ as follows:
+
+$V(G')=\{v_1,\dots,v_N\}$ and join $v_i$ to $v_j$ \textit{iff} $D_i \cap D_j \ne \emptyset$. Then $G'$ contains at most $k$ independent points. 
+
+\end{frame}
+
+%*************************************************************
+\begin{frame}
+
+Now we will show that $G'$ is bipartite. \\
+Consider a circuit $(v_1,\dots,v_m)$ in $G'$ and the corresponding sets $S_{D_1},\dots,S_{D_m}$. Then $D_1,\dots,D_m$ must be different. If $D_v = D_\mu$ then each edge of $D_v$ also belongs to $D_\mu$ and no other member of $F$. Hence $v$ has degree 1 and cannot occur in any circuit of $G'$.
+
+Since $D_i \cap D_{i+1} \ne \emptyset$, we have either $S_{D_i}\subset S_{D_{i+1}}$ or $S_{D_{i+1}}\subset S_{D_i}$
+
+We claim that both possibilities occur alternatively and this will prove that $m$ is even. Suppose not, example, $S_{D_0} \subset S_{D_1}\subset S_{D_2}$. 
+
+We say $D_i$ is to the left from $D_j$ if either $S_{D_i}\subset S_{D_j}$ or $V(G)-S_{D_i}\subset S_{D_j}$. 
+
+$D_i$ is to the right from $D_j$ if $S_{D_i}\subset V(G)-S_{D_j}$ or $V(G)-S_{D_i}\subset V(G)-S_{D_j}$. 
+
+Now, since $F$ consist of laminar cuts, each $D_i\ne D_j$ is either to the left or to the right from $D_j$.
+
+Since $D_2$ is to the right from $D_1$ but $D_0 = D_m$ is to the left from $D_1$, there is a $j$, $1\le j\le m-1$ such that $D_j$ is to the right from $D_1$ but $D_{j+1}$ is to the left from $D_1$.  
+    
+Since $D_j$ and $D_{j+1}$ have a common edge $e$, which must belong to $D_1$. Hence $e$ belongs to three cuts, which is a contradiction. 
+
+\eofproof
+\end{frame}
+
+%*************************************************************
+\begin{frame}
+
+\textbf{Definitions : }
+A \textit{hypergraph} H is a finite collection of finite sets. These sets are called edges and the elements of the edges are called vertices. Let $V(H)$ denote the set of vertices. If $E_1,\dots,E_m$ are the edges and $v_1,\dots,v_n$ are the vertices of H, then we define 
+$$
+    a_{ij}=\left\{
+    \begin{array}{@{}ll@{}}
+    1, & \text{if}\ v_i \in E_j \\
+    0, & \text{otherwise}
+    \end{array}\right.
+$$
+
+\begin{hypergraph}[Hypergraph]
+If any hypergraph H' arising from H by multiplication of the vertices satisfies $v_2(H') = 2v(H')$ then $\tau(H) = v(H)$. 
+\end{hypergraph}
+
+\begin{proof}
+First we show that\\
+\textbf{1.} If $F$ is a collection of pairwise laminar directed cut then its incidence matrix $A$ is totally unimodular. 
+
+\end{proof}
 \end{frame}
 
 
