@@ -154,8 +154,9 @@ If no such $A$ exists, any edge of $\Delta_G(T)$ can be added to $F$.
 
 \splittextfig{
     \vskip 1cm
-    Otherwise let $e = (x, y) \in \Delta_{G-F}(A\cup T) - \Delta_{G-F}(A)$
-    Such an edge must exist because
+    Otherwise let $e = (x, y) \in \Delta_{G-F}(A\cup T) - \Delta_{G-F}(A)$ 
+    as shown in \textbf{figure \ref{tikz:p1edgeexist}}.\\
+    Such an edge must exist because :
     \begin{equation*}
     \delta_{G-F}(A \cup T) = \delta_G(A \cup T) \geq k > k - 1 = \delta_{G-F}(A)
     \end{equation*}
@@ -169,13 +170,18 @@ If no such $A$ exists, any edge of $\Delta_G(T)$ can be added to $F$.
 %*************************************************************
 \begin{frame}
 
-% from above frame
+% from above frame ????
 %which belongs to $\Delta_{G-F}(A\cup T) - \Delta_{G-F}(A)$ such that $x\in T-A$ and $y\in V(G) -T-A$.
 
-Now we want to show that that we can add $e$ to $F$ and $F+e$ will be an arborescence and satisfy $\Delta_{G-F}(S) \ge k-1$. For sure, we can see that $F$ is an arborescence. If $e\not\in \Delta_G(S)$ then $$\delta_{G-F-e}(S) = \delta_{G-F}(S) \ge k-1$$
+We claim $e$ can be added $F$ s.t. $F + e$ is an arborescence (trivial) and \eqref{eq:hyp} holds.
+
+% Now we want to show that that we can add $e$ to $F$ and $F+e$ will be an arborescence and satisfy $\Delta_{G-F}(S) \ge k-1$. For sure, we can see that $F$ is an arborescence.
+
+If $e\not\in \Delta_G(S)$ then $$\delta_{G-F-e}(S) = \delta_{G-F}(S) \ge k-1$$
 Now, if we have that $e\in \Delta_G(S)$ then $x\in S$ and $y\in V(G)-S$. That is, $x$ and $y$ are in different set of vertices of $G$. Next, we will use the inequality; 
 \begin{equation}\delta_{G-F}(S\cup A) + \delta_{G-F}(S\cap A) \le \delta_{G-F}(S) + \delta_{G-F}(A)\end{equation}
-We already know from the maximality of $A$ that $\delta_{G-F}(A)=k-1$, $\delta_{G-F}(S\cap A) \ge k-1$ and $\delta_{G-F}(S\cup A) \ge k$. Then from $(1)$ we have $\delta_{G-F}(S) \ge k$. Therefore $\delta_{G-F-e}(S) \ge k-1$. 
+From the maximality of $A$ : $\delta_{G-F}(A)=k-1$, $\delta_{G-F}(S\cap A) \ge k-1$ and $\delta_{G-F}(S\cup A) \ge k$.\\
+Then from $(1)$ we have $\delta_{G-F}(S) \ge k$. Therefore $\delta_{G-F-e}(S) \ge k-1$. 
 \eofproof
 \end{frame}
 
